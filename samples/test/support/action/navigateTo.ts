@@ -1,7 +1,9 @@
 import waitForDisplayed from '../wait/waitForDisplayed';
 import LoginForm from '../selectors/LoginForm';
+import { OktaSignInV1, OktaSignInOIE } from  '../selectors';
 import Home from '../selectors/Home';
 import startApp from './startApp';
+const OktaSignIn = process.env.ORG_OIE_ENABLED ? OktaSignInOIE : OktaSignInV1;
 
 export default async (
   userName: string,
@@ -17,6 +19,13 @@ export default async (
         selector = LoginForm.password;
         queryParams = { flow: 'form' };
         break;
+    }
+
+    case 'Login with Social IDP': {
+      url = '/login';
+      selector = OktaSignIn.signinWithGoogleBtn;
+      queryParams = { flow: 'widget' };
+      break;
     }
 
     case 'the Root View': {

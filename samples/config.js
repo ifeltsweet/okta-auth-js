@@ -74,13 +74,13 @@ const samples = [
     name: 'express-direct-auth',
     template: 'express-direct-auth',
     specs: [],
-    features: ['basic-auth', 'root-page']
+    //features: ['basic-auth', 'root-page']
   },
   {
     name: 'express-embedded-widget',
     template: 'express-embedded-widget',
     specs: [],
-    features: []
+    features: ['social-idp-with-widget']
   },
 ].map(function(sampleConfig) {
   if (!sampleConfig.name) {

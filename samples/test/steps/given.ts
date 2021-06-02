@@ -30,6 +30,11 @@ Given(
 );
 
 Given(
+  /^a SPA, WEB APP or MOBILE Policy (.*)$/,
+  setEnvironment
+);
+
+Given(
   /^([^/s]+) navigates to (.*)$/,
   navigateTo
 );

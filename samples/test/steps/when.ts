@@ -19,6 +19,9 @@ import clickElement from '../support/action/clickElement';
 
 import enterCredential from '../support/action/enterCredential';
 import submitForm from '../support/action/submitForm';
+import clickLoginWithGoogle from '../support/action/clickLoginWithGoogle';
+import loginToGoogle from '../support/action/loginToGoogle';
+
 
 When(
   /^User enters (username|password) into the form$/,
@@ -36,8 +39,18 @@ When(
 );
 
 When(
-  /^she submits the Login form$/,
+  /^she submits the Login form(?: with blank fields)?$/,
   submitForm
+);
+
+When(
+  /^she clicks the "Login with Google" button in the embedded Sign In Widget$/,
+  clickLoginWithGoogle
+);
+
+When(
+  /^logs in to Google$/,
+  () => loginToGoogle()
 );
 
 When(
