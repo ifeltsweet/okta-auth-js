@@ -10,6 +10,6 @@ export declare interface ActionContext {
 
 export default async function (this: ActionContext, firstName: string, assignToGroups?: string[]): Promise<void> {
    const [user, a18nProfile] = await createUser(firstName, assignToGroups);
-   this.user = user;
-   this.a18nProfile = a18nProfile;
+   this.user = user as User;
+   this.a18nProfile = a18nProfile as A18nProfile;
 }
