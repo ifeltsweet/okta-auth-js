@@ -9,6 +9,7 @@ import VerifyPhone from '../selectors/VerifyPhone';
  * Check if browser has navigated to expected page
  * @param  {String}   pageName       Expected page title
  */
+/* eslint-disable complexity, max-statements */
 export default async (pageName?: string) => {
 
   let selector;
