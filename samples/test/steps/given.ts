@@ -26,6 +26,12 @@ import navigateTo from '../support/action/navigateTo';
 import navigateToLoginAndAuthenticate from '../support/action/navigateToLoginAndAuthenticate';
 import createAndStoreUserInContext from '../support/action/live-user/createAndStoreUserInContext';
 
+Given(
+  /^an APP$/,
+  async function() {
+    return await setEnvironment('default');
+  }
+);
 
 Given(
   /^an APP Sign On Policy (.*)$/,
