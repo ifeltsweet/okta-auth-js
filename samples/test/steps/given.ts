@@ -25,7 +25,8 @@ import setEnvironment from '../support/action/setEnvironment';
 import navigateTo from '../support/action/navigateTo';
 import navigateToLoginAndAuthenticate from '../support/action/navigateToLoginAndAuthenticate';
 import createAndStoreUserInContext from '../support/action/live-user/createAndStoreUserInContext';
-
+import activateContextUserSms from '../support/action/live-user/activateContextUserSms';
+import ActionContext from '../support/action/live-user/context';
 
 Given(
   /^an APP Sign On Policy (.*)$/,
@@ -50,8 +51,7 @@ Given(
 
 Given(
   /^([^/s]+) is a user with a verified email and a set password$/,
-  async function(firstName: string) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  async function(this: ActionContext, firstName: string) {
     await createAndStoreUserInContext.call(this, firstName);
   }
 );
@@ -68,11 +68,28 @@ Given(
 
 Given(
   /^a User named "([^/s]+)" created in the admin interface with a Password only$/,
-  async function(firstName: string) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    await createAndStoreUserInContext.call(this, firstName, 'MFA Required');
+  async function(this: ActionContext, firstName: string) {
+    await createAndStoreUserInContext.call(this, firstName, ['MFA Required']);
   }
 );
+
+Given(
+  /^an Authenticator Enrollment Policy that has PHONE as optional and EMAIL as required for the Everyone Group$/,
+  () => ({}) // no-op
+);
+
+Given(
+  /^a User named "([^/s]+)" created that HAS NOT yet enrolled in the SMS factor$/,
+  async function(this: ActionContext, firstName: string) {
+    await createAndStoreUserInContext.call(this, firstName, ['Phone Enrollment Required', 'MFA Required']);
+  }
+);
+
+Given(
+  /^Mary has enrolled in the SMS factor$/,
+  activateContextUserSms
+);
+
 
 // Given(
 //     /^I open the (url|site) "([^"]*)?"$/,

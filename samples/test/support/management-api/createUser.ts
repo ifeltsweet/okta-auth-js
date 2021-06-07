@@ -5,7 +5,7 @@ import { getConfig } from '../../util';
 import a18nClient, {A18nProfile} from './a18nClient';
 import deleteUser from './deleteUser';
 
-export default async (firstName: string, assignToGroup = 'Basic Auth Web'): Promise<(User |A18nProfile)[]> => {
+export default async (firstName: string, assignToGroups = ['Basic Auth Web']): Promise<(User|A18nProfile)[]> => {
   const config = getConfig();
   const oktaClient = new Client({
     orgUrl: config.orgUrl,
@@ -37,20 +37,23 @@ export default async (firstName: string, assignToGroup = 'Basic Auth Web'): Prom
     });
     user.credentials.password.value = password;
 
-    // TODO: create test group and attach password recovery policy during test run when API supports it
-    const {value: testGroup} = await oktaClient.listGroups({
-      q: assignToGroup
-    }).next();
-
-    if (!testGroup) {
-      throw new Error(`Group "${assignToGroup}" is not found`);
-    }
-
     await oktaClient.assignUserToApplication(config.clientId as string, {
       id: user.id
     });
+    
+    for (const groupName of assignToGroups) {
+      // TODO: create test group and attach password recovery policy during test run when API supports it
+      const {value: testGroup} = await oktaClient.listGroups({
+        q: groupName
+      }).next();
 
-    await oktaClient.addUserToGroup((testGroup as Group).id, user.id);
+      if (!testGroup) {
+        throw new Error(`Group "${groupName}" is not found`);
+      }
+
+      await oktaClient.addUserToGroup((testGroup as Group).id, user.id);
+    }
+
     return [user, a18nProfile];
   } catch (err) {
     await deleteUser(user, a18nProfile);

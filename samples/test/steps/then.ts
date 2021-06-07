@@ -80,6 +80,26 @@ Then(
   checkIsOnPage.bind(null, 'Reset Password')
 );
 
+Then(
+  /^she is presented with an option to select SMS to verify$/,
+  checkIsOnPage.bind(null, 'Verify using phone authenticator')
+);
+
+Then(
+  /^the screen changes to receive an input for a code$/,
+  checkIsOnPage.bind(null, 'Challenge phone authenticator')
+);
+
+Then(
+  /^the sample show as error message "(?<message>.+?)" on the SMS Challenge page$/,
+  checkFormMessage
+);
+
+Then(
+  /^she sees a field to re-enter another code$/,
+  checkIsOnPage.bind(null, 'Challenge phone authenticator')
+);
+
 
 // import checkClass from '../support/check/checkClass';
 // import checkContainsAnyText from '../support/check/checkContainsAnyText';

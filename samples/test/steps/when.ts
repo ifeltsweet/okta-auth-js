@@ -29,9 +29,16 @@ import submitPasswordRecoverForm from '../support/action/submitPasswordRecoverFo
 import selectEmailAuthenticator from '../support/action/selectEmailAuthenticator';
 import enterIncorrectCode from '../support/action/enterIncorrectCode';
 import inputInvalidEmail from '../support/action/inputInvalidEmail';
+import selectVerifyBySms from '../support/action/selectVerifyBySms';
+
 
 When(
   /^User enters (username|password) into the form$/,
+  enterCredential
+);
+
+When(
+  /^she has inserted her (username|password)$/,
   enterCredential
 );
 
@@ -43,6 +50,11 @@ When(
 When(
   /^she inputs her correct Email$/,
   enterLiveUserEmail
+);
+
+When(
+  /^her (password) is correct$/,
+  enterCredential
 );
 
 When(
@@ -109,6 +121,17 @@ When (
   /^she inputs an Email that doesn't exist$/,
   inputInvalidEmail
 );
+
+When(
+  /^She selects SMS from the list of methods$/,
+  selectVerifyBySms
+);
+
+When(
+  /^She inputs the incorrect code from the SMS$/,
+  enterIncorrectCode
+);
+
 // When(
 //     /^I (click|doubleclick) on the (link|button|element) "([^"]*)?"$/,
 //     clickElement
