@@ -1,7 +1,15 @@
 import createUser from '../../management-api/createUser';
 
-export default async function (firstName: string, assignToGroup?: string): Promise<void> {
-   const [user, a18nProfile] = await createUser(firstName, assignToGroup);
+import { User } from '@okta/okta-sdk-nodejs';
+import {A18nProfile} from '../../management-api/a18nClient';
+
+export declare interface ActionContext {
+   a18nProfile: A18nProfile;
+   user: User;
+ }
+
+export default async function (this: ActionContext, firstName: string, assignToGroups?: string[]): Promise<void> {
+   const [user, a18nProfile] = await createUser(firstName, assignToGroups);
    this.user = user;
    this.a18nProfile = a18nProfile;
 }
