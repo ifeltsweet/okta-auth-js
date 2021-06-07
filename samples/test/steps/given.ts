@@ -24,7 +24,8 @@ import { Given } from '@cucumber/cucumber';
 import setEnvironment from '../support/action/setEnvironment';
 import navigateTo from '../support/action/navigateTo';
 import navigateToLoginAndAuthenticate from '../support/action/navigateToLoginAndAuthenticate';
-import createAndStoreUserInContext, {ActionContext} from '../support/action/live-user/createAndStoreUserInContext';
+import createAndStoreUserInContext from '../support/action/live-user/createAndStoreUserInContext';
+import ActionContext from '../support/action/live-user/context';
 
 
 Given(
