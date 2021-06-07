@@ -72,12 +72,27 @@ Then(
 
 Then(
   /^she sees a page to input her code$/,
-    selectEmailAuthenticator
+  selectEmailAuthenticator
 );
 
 Then(
   /^she sees a page to set her password$/,
   checkIsOnPage.bind(null, 'Reset Password')
+);
+
+Then(
+  /^she is presented with a list of factors$/,
+  checkIsOnPage.bind(null, 'Select authenticator')
+);
+
+Then(
+  /^the screen changes to receive an input for a code$/,
+  checkIsOnPage.bind(null, 'Enroll phone authenticator')
+);
+
+Then(
+  /^an application session is created$/,
+  checkProfile
 );
 
 

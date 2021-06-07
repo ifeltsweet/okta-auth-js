@@ -21,6 +21,7 @@ import confirmValidPassword from '../support/action/confirmValidPassword';
 import enterCredential from '../support/action/enterCredential';
 import enterValidPassword from '../support/action/enterValidPassword';
 import enterCorrectCode from '../support/action/live-user/enterCorrectCode';
+import enterCorrectCodeFromSms from '../support/action/live-user/enterCorrectCodeFromSms';
 import enterLiveUserEmail from '../support/action/live-user/enterEmail';
 import submitAnyForm from '../support/action/submitAnyForm';
 import submitForm from '../support/action/submitForm';
@@ -29,9 +30,16 @@ import submitPasswordRecoverForm from '../support/action/submitPasswordRecoverFo
 import selectEmailAuthenticator from '../support/action/selectEmailAuthenticator';
 import enterIncorrectCode from '../support/action/enterIncorrectCode';
 import inputInvalidEmail from '../support/action/inputInvalidEmail';
+import selectSmsAuthenticator from '../support/action/selectSmsAuthenticator';
+import enterLiveUserPhone from '../support/action/live-user/enterPhone';
 
 When(
   /^User enters (username|password) into the form$/,
+  enterCredential
+);
+
+When(
+  /^she has inserted her (username|password)$/,
   enterCredential
 );
 
@@ -43,6 +51,11 @@ When(
 When(
   /^she inputs her correct Email$/,
   enterLiveUserEmail
+);
+
+When(
+  /^her (password) is correct$/,
+  enterCredential
 );
 
 When(
@@ -109,6 +122,32 @@ When (
   /^she inputs an Email that doesn't exist$/,
   inputInvalidEmail
 );
+
+When(
+  /^She selects SMS from the list$/,
+  selectSmsAuthenticator
+);
+
+When(
+  /^She inputs a valid phone number$/,
+  enterLiveUserPhone
+);
+
+When(
+  /^She selects "Receive a Code"$/,
+  submitAnyForm
+);
+
+When(
+  /^She inputs the correct code from the SMS$/,
+  enterCorrectCodeFromSms
+);
+
+When(
+  /^She selects "Verify"$/,
+  submitAnyForm
+);
+
 // When(
 //     /^I (click|doubleclick) on the (link|button|element) "([^"]*)?"$/,
 //     clickElement

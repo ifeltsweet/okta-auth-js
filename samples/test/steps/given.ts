@@ -74,6 +74,19 @@ Given(
   }
 );
 
+Given(
+  /^an Authenticator Enrollment Policy that has PHONE as optional and EMAIL as required for the Everyone Group$/,
+  () => ({}) // no-op
+);
+
+Given(
+  /^a User named "([^/s]+)" created that HAS NOT yet enrolled in the SMS factor$/,
+  async function(firstName: string) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    await createAndStoreUserInContext.call(this, firstName, 'Phone Enrollment Required');
+  }
+);
+
 // Given(
 //     /^I open the (url|site) "([^"]*)?"$/,
 //     openWebsite
