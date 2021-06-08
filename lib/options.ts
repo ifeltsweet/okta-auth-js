@@ -5,7 +5,6 @@ import { OktaAuthOptions, StorageManagerOptions } from './types';
 
 import fetchRequest from './fetch/fetchRequest';
 import browserStorage from './browser/browserStorage';
-import serverStorage from './server/serverStorage';
 import { isBrowser, isHTTPS } from './features';
 
 const BROWSER_STORAGE: StorageManagerOptions = {
@@ -85,7 +84,11 @@ function getCookieSettings(args: OktaAuthOptions = {}, isHTTPS: boolean) {
 
 
 export function getDefaultOptions(): OktaAuthOptions {
-  const storageUtil = isBrowser() ? browserStorage : serverStorage;
+  if (!isBrowser()) {
+    throw new Error('Can be used only in a browser');
+  }
+
+  const storageUtil = browserStorage;
   const storageManager = isBrowser() ? BROWSER_STORAGE : SERVER_STORAGE;
   return {
     devMode: false,

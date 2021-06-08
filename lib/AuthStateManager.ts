@@ -3,7 +3,7 @@ import { AuthState, AuthStateLogOptions } from './types';
 import { OktaAuth } from '.';
 import { getConsole } from './util';
 import { EVENT_ADDED, EVENT_REMOVED } from './TokenManager';
-const PCancelable = require('p-cancelable');
+import PCancelable from 'p-cancelable';
 
 export const INITIAL_AUTH_STATE = null;
 const DEFAULT_PENDING = {

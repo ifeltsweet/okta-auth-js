@@ -24,7 +24,7 @@ import {
 } from '../types';
 import { warn } from '../util';
 
-const Cookies = require('js-cookie');
+import Cookies from 'js-cookie';
 
 // Building this as an object allows us to mock the functions in our tests
 var storageUtil: BrowserStorageUtil = {
